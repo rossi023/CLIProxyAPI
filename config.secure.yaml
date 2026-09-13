@@ -1,25 +1,26 @@
-# CLIProxyAPI Configuration
-# See config.example.yaml for all options
+# CLIProxyAPI Secure Configuration Template
+# Copy this file to config.yaml and replace placeholder values
+# NEVER commit config.yaml to version control
 
 host: ""
 port: 8317
 
 remote-management:
   allow-remote: true
-  management-key: "LuoxiAdmin2024!"
+  management-key: "YOUR_MANAGEMENT_KEY_HERE"
+
+management-password: "YOUR_MANAGEMENT_PASSWORD_HERE"
 
 api-keys:
-  - "sk-luoxi-amd-2024"
-  - "sk-luoxi-test-2024"
-
-management-password: "LuoxiAdmin2024!"
+  - "YOUR_API_KEY_1"
+  - "YOUR_API_KEY_2"
 
 # OpenAI Compatibility - AMD
 openai-compatibility:
   - name: "amd"
     base-url: "https://developer.amd.com.cn/radeon/api/v1"
     api-key-entries:
-      - api-key: "rc-250c5cbd1f53391d2d48e34e16d423fdf87c2ca6ab4cee10"
+      - api-key: "YOUR_AMD_API_KEY_HERE"
     models:
       - name: "DeepSeek-V4-Flash"
         alias: "deepseek-v4-flash"
