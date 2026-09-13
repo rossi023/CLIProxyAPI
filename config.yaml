@@ -1,0 +1,49 @@
+# CLIProxyAPI Configuration
+# See config.example.yaml for all options
+
+host: ""
+port: 8317
+
+remote-management:
+  allow-remote: true
+  management-key: "LuoxiAdmin2024!"
+
+api-keys:
+  - "sk-luoxi-amd-2024"
+  - "sk-luoxi-test-2024"
+
+management-password: "LuoxiAdmin2024!"
+
+# OpenAI Compatibility - AMD
+openai-compatibility:
+  - name: "amd"
+    base-url: "https://developer.amd.com.cn/radeon/api/v1"
+    api-key-entries:
+      - api-key: "rc-250c5cbd1f53391d2d48e34e16d423fdf87c2ca6ab4cee10"
+    models:
+      - name: "DeepSeek-V4-Flash"
+        alias: "deepseek-v4-flash"
+        display-name: "DeepSeek V4 Flash"
+        max-context-length: 1048576
+        thinking:
+          levels: ["high", "medium", "low"]
+      - name: "DeepSeek-V4-Flash-Vision-Exp"
+        alias: "deepseek-v4-vision"
+        display-name: "DeepSeek V4 Vision"
+        max-context-length: 1048576
+        input-modalities: ["text", "image"]
+        thinking:
+          levels: ["high", "medium", "low"]
+      - name: "MiniCPM5-2B"
+        alias: "minicpm5"
+        display-name: "MiniCPM5 2B"
+        max-context-length: 131072
+        thinking:
+          levels: ["high", "medium", "low"]
+      - name: "Qwen3.8-Flash-Next"
+        alias: "qwen3.8-flash"
+        display-name: "Qwen 3.8 Flash Next"
+        max-context-length: 262144
+        input-modalities: ["text", "image"]
+        thinking:
+          levels: ["high", "medium", "low"]
