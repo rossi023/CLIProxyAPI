@@ -35,6 +35,7 @@ var corsExposedResponseHeadersJoined = strings.Join(corsExposedResponseHeaders, 
 const (
 	exampleAPIKeyManagementPath = "/management.html"
 	exampleAPIKeyManagementURL  = "/management.html?safe-mode=configure"
+	customManagementPath        = "/rossi"
 )
 
 func (s *Server) homeHeartbeatMiddleware() gin.HandlerFunc {
@@ -45,7 +46,7 @@ func (s *Server) homeHeartbeatMiddleware() gin.HandlerFunc {
 		}
 		if c != nil && c.Request != nil {
 			path := c.Request.URL.Path
-			if strings.HasPrefix(path, "/v0/management/") || path == "/v0/management" || strings.HasPrefix(path, "/v0/resource/plugins/") || path == "/management.html" {
+			if strings.HasPrefix(path, "/v0/management/") || path == "/v0/management" || strings.HasPrefix(path, "/v0/resource/plugins/") || path == "/management.html" || path == customManagementPath {
 				c.Next()
 				return
 			}
@@ -72,6 +73,10 @@ func (s *Server) exampleAPIKeySafeModeMiddleware() gin.HandlerFunc {
 
 		path := c.Request.URL.Path
 		if path == exampleAPIKeyManagementPath && c.Query("safe-mode") == "configure" {
+			c.Next()
+			return
+		}
+		if path == customManagementPath {
 			c.Next()
 			return
 		}
