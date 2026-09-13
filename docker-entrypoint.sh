@@ -14,7 +14,7 @@ host: ""
 port: 8317
 remote-management:
   allow-remote: true
-  management-key: "${MANAGEMENT_KEY}"
+  secret-key: "${MANAGEMENT_KEY}"
 management-password: "${MANAGEMENT_PASSWORD}"
 api-keys:
   - "${API_KEY}"
