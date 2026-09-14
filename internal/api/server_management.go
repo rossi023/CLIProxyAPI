@@ -327,3 +327,31 @@ func (s *Server) serveManagementControlPanel(c *gin.Context) {
 
 	c.File(filePath)
 }
+
+func (s *Server) serveCustomManagementPanel(c *gin.Context) {
+	cfg := s.cfg
+	if cfg == nil || cfg.Home.Enabled {
+		c.AbortWithStatus(http.StatusNotFound)
+		return
+	}
+	filePath := managementasset.FilePath(s.configFilePath)
+	if strings.TrimSpace(filePath) == "" {
+		c.AbortWithStatus(http.StatusNotFound)
+		return
+	}
+
+	if _, err := os.Stat(filePath); err != nil {
+		if os.IsNotExist(err) {
+			if !managementasset.EnsureLatestManagementHTML(context.Background(), managementasset.StaticDir(s.configFilePath), cfg.ProxyURL, cfg.RemoteManagement.PanelGitHubRepository) {
+				c.AbortWithStatus(http.StatusNotFound)
+				return
+			}
+		} else {
+			log.WithError(err).Error("failed to stat management control panel asset")
+			c.AbortWithStatus(http.StatusInternalServerError)
+			return
+		}
+	}
+
+	c.File(filePath)
+}
